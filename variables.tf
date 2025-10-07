@@ -17,3 +17,8 @@ variable "az_subscription_id" {
   type        = string
   description = "Azure Subscription ID where resources will be created"
 }
+
+variable "az_tenant_id" {
+  type        = string
+  description = "Azure Tenant ID"
+}
