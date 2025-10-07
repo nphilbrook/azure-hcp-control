@@ -6,10 +6,10 @@ provider "azurerm" {
   tenant_id       = var.az_tenant_id
 }
 
-provider "azuread" {
-  use_cli   = false
-  tenant_id = var.az_tenant_id
-}
+# provider "azuread" {
+#   use_cli   = false
+#   tenant_id = var.az_tenant_id
+# }
 
 provider "tfe" {
   organization = var.tfc_organization_name

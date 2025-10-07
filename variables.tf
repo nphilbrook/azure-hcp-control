@@ -22,3 +22,14 @@ variable "az_tenant_id" {
   type        = string
   description = "Azure Tenant ID"
 }
+
+variable "prefix" {
+  type        = string
+  description = "Prefix to use for all resources created"
+  default     = "foo"
+}
+
+variable "admin_password" {
+  type      = string
+  sensitive = true
+}
