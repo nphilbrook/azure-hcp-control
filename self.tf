@@ -27,22 +27,12 @@ resource "tfe_workspace_settings" "self" {
 # to authenticate to Azure.
 #
 # https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "enable_azure_provider_auth" {
+resource "tfe_variable" "arm_client_id" {
   workspace_id = tfe_workspace.self.id
 
-  key      = "TFC_AZURE_PROVIDER_AUTH"
-  value    = "true"
+  key      = "ARM_CLIENT_ID"
+  value    = "0b1884af-88e3-4bd2-a07c-806095100f59"
   category = "env"
-
-  description = "Enable the Workload Identity integration for Azure."
 }
 
-resource "tfe_variable" "tfc_azure_client_id" {
-  workspace_id = tfe_workspace.self.id
-
-  key      = "TFC_AZURE_RUN_CLIENT_ID"
-  value    = azuread_application.tfc_application.id
-  category = "env"
-
-  description = "The Azure Client ID runs will use to authenticate."
-}
+# ARM_CLIENT_SECRET is click-ops'd in HCPt
