@@ -1,5 +1,5 @@
 data "tfe_github_app_installation" "gha_installation" {
-  name = "nphilbrook"
+  name = var.github_organization
 }
 
 resource "tfe_project" "azure" {
@@ -8,11 +8,10 @@ resource "tfe_project" "azure" {
 }
 
 resource "tfe_workspace" "self" {
-  name         = "azure-hcp-control"
-  project_id   = tfe_project.azure.id
-  organization = "philbrook"
+  name       = "azure-hcp-control"
+  project_id = tfe_project.azure.id
   vcs_repo {
-    identifier                 = "nphilbrook/azure-hcp-control"
+    identifier                 = "${var.github_organization}/azure-hcp-control"
     github_app_installation_id = data.tfe_github_app_installation.gha_installation.id
   }
 }

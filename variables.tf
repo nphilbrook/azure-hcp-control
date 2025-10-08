@@ -13,6 +13,12 @@ variable "tfc_organization_name" {
   default     = "philbrook"
 }
 
+variable "github_organization" {
+  type        = string
+  description = "The name of your GitHub organization"
+  default     = "nphilbrook"
+}
+
 variable "az_subscription_id" {
   type        = string
   description = "Azure Subscription ID where resources will be created"
