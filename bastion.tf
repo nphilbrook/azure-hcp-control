@@ -82,6 +82,7 @@ resource "azurerm_linux_virtual_machine" "main" {
     azurerm_network_interface.internal.id,
   ]
 
+  admin_username = "adminuser" #WHY
   admin_ssh_key {
     username   = "adminuser"
     public_key = <<EOF
