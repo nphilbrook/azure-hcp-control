@@ -13,7 +13,6 @@ resource "tfe_workspace" "self" {
   organization = "philbrook"
   vcs_repo {
     identifier                 = "nphilbrook/azure-hcp-control"
-    branch                     = "main"
     github_app_installation_id = data.tfe_github_app_installation.gha_installation.id
   }
 }
