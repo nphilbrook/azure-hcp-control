@@ -33,15 +33,3 @@ variable "az_client_id" {
   type        = string
   description = "Azure Client ID"
 }
-
-variable "prefix" {
-  type        = string
-  description = "Prefix to use for all resources created"
-  default     = "foo"
-}
-
-variable "juniper_junction" {
-  type        = list(string)
-  description = "List of IP address ranges to allow inbound."
-  default     = []
-}
