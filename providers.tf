@@ -2,8 +2,8 @@ provider "azurerm" {
   use_cli                         = false
   resource_provider_registrations = "none"
   features {}
-  subscription_id = var.az_subscription_id
-  tenant_id       = var.az_tenant_id
+  # subscription_id = var.az_subscription_id
+  # tenant_id       = var.az_tenant_id
 }
 
 # provider "azuread" {

@@ -23,6 +23,11 @@ variable "az_tenant_id" {
   description = "Azure Tenant ID"
 }
 
+variable "az_client_id" {
+  type        = string
+  description = "Azure Client ID"
+}
+
 variable "prefix" {
   type        = string
   description = "Prefix to use for all resources created"
