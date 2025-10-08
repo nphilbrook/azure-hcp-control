@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "philbrook"
     workspaces {
-      name = "azure-core-infra"
+      name = "azure-hcp-control"
     }
   }
 }

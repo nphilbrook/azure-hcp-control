@@ -8,11 +8,11 @@ resource "tfe_project" "azure" {
 }
 
 resource "tfe_workspace" "self" {
-  name         = "azure-core-infra"
+  name         = "azure-hcp-control"
   project_id   = tfe_project.azure.id
   organization = "philbrook"
   vcs_repo {
-    identifier                 = "nphilbrook/azure-core-infra"
+    identifier                 = "nphilbrook/azure-hcp-control"
     branch                     = "main"
     github_app_installation_id = data.tfe_github_app_installation.gha_installation.id
   }
