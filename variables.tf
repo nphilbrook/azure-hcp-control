@@ -34,11 +34,6 @@ variable "prefix" {
   default     = "foo"
 }
 
-variable "admin_password" {
-  type      = string
-  sensitive = true
-}
-
 variable "juniper_junction" {
   type        = list(string)
   description = "List of IP address ranges to allow inbound."
