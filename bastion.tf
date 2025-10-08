@@ -49,26 +49,26 @@ resource "azurerm_network_interface" "internal" {
   }
 }
 
-resource "azurerm_network_security_group" "webserver" {
-  name                = "tls_webserver"
+resource "azurerm_network_security_group" "ssh" {
+  name                = "ssh"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   security_rule {
     access                     = "Allow"
     direction                  = "Inbound"
-    name                       = "tls"
+    name                       = "ssh"
     priority                   = 100
     protocol                   = "Tcp"
     source_port_range          = "*"
-    source_address_prefix      = "*"
-    destination_port_range     = "443"
+    source_address_prefixes    = var.juniper_junction
+    destination_port_range     = "22"
     destination_address_prefix = azurerm_network_interface.main.private_ip_address
   }
 }
 
 resource "azurerm_network_interface_security_group_association" "main" {
-  network_interface_id      = azurerm_network_interface.internal.id
-  network_security_group_id = azurerm_network_security_group.webserver.id
+  network_interface_id      = azurerm_network_interface.main.id
+  network_security_group_id = azurerm_network_security_group.ssh.id
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
