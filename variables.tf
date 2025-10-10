@@ -38,3 +38,9 @@ variable "ingress_ips" {
   type    = list(string)
   default = []
 }
+
+variable "tfe_token" {
+  type      = string
+  default   = ""
+  sensitive = true
+}

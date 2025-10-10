@@ -43,6 +43,15 @@ resource "tfe_variable" "arm_tenant_id" {
   category = "env"
 }
 
+resource "tfe_variable" "tfe_token" {
+  variable_set_id = tfe_variable_set.azure_creds.id
+
+  key       = "tfe_token"
+  value     = var.tfe_token
+  category  = "env"
+  sensitive = true
+}
+
 # ARM_CLIENT_SECRET is click-ops'd in HCPt
 
 # non-auth related shared stuff to propagate down to everywhere
