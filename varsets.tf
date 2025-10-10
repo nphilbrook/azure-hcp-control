@@ -52,6 +52,12 @@ resource "tfe_variable_set" "azure_config" {
   parent_project_id = tfe_project.azure.id
 }
 
+# All workspaces and stacks in this project have access to this varset
+resource "tfe_project_variable_set" "azure_config_attach" {
+  project_id      = tfe_project.azure.id
+  variable_set_id = tfe_variable_set.azure_config.id
+}
+
 resource "tfe_variable" "ingress_ips" {
   variable_set_id = tfe_variable_set.azure_config.id
 
