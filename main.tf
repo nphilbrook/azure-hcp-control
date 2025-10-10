@@ -17,7 +17,8 @@ resource "tfe_workspace" "self" {
 }
 
 resource "tfe_workspace_settings" "self" {
-  workspace_id   = tfe_workspace.self.id
-  execution_mode = "remote"
+  workspace_id        = tfe_workspace.self.id
+  execution_mode      = "remote"
+  global_remote_state = true
 }
 
