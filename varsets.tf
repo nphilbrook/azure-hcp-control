@@ -1,26 +1,3 @@
-data "tfe_github_app_installation" "gha_installation" {
-  name = var.github_organization
-}
-
-resource "tfe_project" "azure" {
-  name        = "azure"
-  description = "Project for Azure resources"
-}
-
-resource "tfe_workspace" "self" {
-  name       = "azure-hcp-control"
-  project_id = tfe_project.azure.id
-  vcs_repo {
-    identifier                 = "${var.github_organization}/azure-hcp-control"
-    github_app_installation_id = data.tfe_github_app_installation.gha_installation.id
-  }
-}
-
-resource "tfe_workspace_settings" "self" {
-  workspace_id   = tfe_workspace.self.id
-  execution_mode = "remote"
-}
-
 # The following variables must be set to allow runs
 # to authenticate to Azure.
 
@@ -34,6 +11,12 @@ resource "tfe_variable_set" "azure_creds" {
   name              = "Azure Credentials"
   global            = false
   parent_project_id = tfe_project.azure.id
+}
+
+# All workspaces and stacks in this project have access to this varset
+resource "tfe_project_variable_set" "azure_creds_attach" {
+  project_id      = tfe_project.azure.id
+  variable_set_id = tfe_variable_set.azure_creds.id
 }
 
 resource "tfe_variable" "arm_client_id" {
@@ -60,9 +43,22 @@ resource "tfe_variable" "arm_tenant_id" {
   category = "env"
 }
 
-resource "tfe_project_variable_set" "azure_creds_attach" {
-  project_id      = tfe_project.azure.id
-  variable_set_id = tfe_variable_set.azure_creds.id
+# ARM_CLIENT_SECRET is click-ops'd in HCPt
+
+# non-auth related shared stuff to propagate down to everywhere
+resource "tfe_variable_set" "azure_config" {
+  name              = "Azure Config"
+  global            = false
+  parent_project_id = tfe_project.azure.id
 }
 
-# ARM_CLIENT_SECRET is click-ops'd in HCPt
+resource "tfe_variable" "ingress_ips" {
+  variable_set_id = tfe_variable_set.azure_config.id
+
+  key      = "ingress_ips"
+  value    = provider::terraform::encode_expr(var.ingress_ips)
+  category = "terraform"
+  hcl      = true
+
+  description = "IPs that should be allowed to ingress to various resources on the vnet"
+}

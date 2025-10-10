@@ -33,3 +33,8 @@ variable "az_client_id" {
   type        = string
   description = "Azure Client ID"
 }
+
+variable "ingress_ips" {
+  type    = list(string)
+  default = []
+}

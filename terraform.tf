@@ -5,5 +5,8 @@ terraform {
       source  = "hashicorp/tfe"
       version = "~>0.70"
     }
+    terraform = {
+      source = "terraform.io/builtin/terraform"
+    }
   }
 }
