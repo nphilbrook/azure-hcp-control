@@ -52,14 +52,6 @@ resource "tfe_variable" "tfe_token" {
   sensitive = true
 }
 
-resource "tfe_variable" "ssh_public_key" {
-  variable_set_id = tfe_variable_set.azure_creds.id
-
-  key      = "ssh_public_key"
-  value    = var.ssh_public_key
-  category = "env"
-}
-
 # ARM_CLIENT_SECRET is click-ops'd in HCPt
 # vault_license is click-ops'd in HCPt
 
@@ -85,4 +77,12 @@ resource "tfe_variable" "ingress_ips" {
   hcl      = true
 
   description = "IPs that should be allowed to ingress to various resources on the vnet"
+}
+
+resource "tfe_variable" "ssh_public_key" {
+  variable_set_id = tfe_variable_set.azure_config.id
+
+  key      = "ssh_public_key"
+  value    = var.ssh_public_key
+  category = "env"
 }
