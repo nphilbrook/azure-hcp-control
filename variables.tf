@@ -44,3 +44,8 @@ variable "tfe_token" {
   default   = ""
   sensitive = true
 }
+
+variable "ssh_public_key" {
+  type    = string
+  default = ""
+}

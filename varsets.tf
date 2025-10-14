@@ -46,13 +46,22 @@ resource "tfe_variable" "arm_tenant_id" {
 resource "tfe_variable" "tfe_token" {
   variable_set_id = tfe_variable_set.azure_creds.id
 
-  key       = "tfe_token"
+  key       = "TFE_TOKEN"
   value     = var.tfe_token
   category  = "env"
   sensitive = true
 }
 
+resource "tfe_variable" "ssh_public_key" {
+  variable_set_id = tfe_variable_set.azure_creds.id
+
+  key      = "ssh_public_key"
+  value    = var.ssh_public_key
+  category = "env"
+}
+
 # ARM_CLIENT_SECRET is click-ops'd in HCPt
+# vault_license is click-ops'd in HCPt
 
 # non-auth related shared stuff to propagate down to everywhere
 resource "tfe_variable_set" "azure_config" {
