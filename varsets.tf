@@ -84,5 +84,5 @@ resource "tfe_variable" "ssh_public_key" {
 
   key      = "ssh_public_key"
   value    = var.ssh_public_key
-  category = "env"
+  category = "terraform"
 }
