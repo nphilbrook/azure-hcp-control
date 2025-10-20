@@ -71,9 +71,9 @@ resource "tfe_project_variable_set" "azure_config_attach" {
 resource "tfe_variable" "ingress_ips" {
   variable_set_id = tfe_variable_set.azure_config.id
 
-  key      = "ingress_ips"
+  key      = "TF_VAR_ingress_ips"
   value    = provider::terraform::encode_expr(var.ingress_ips)
-  category = "terraform"
+  category = "env"
   hcl      = true
 
   description = "IPs that should be allowed to ingress to various resources on the vnet"
@@ -82,7 +82,7 @@ resource "tfe_variable" "ingress_ips" {
 resource "tfe_variable" "ssh_public_key" {
   variable_set_id = tfe_variable_set.azure_config.id
 
-  key      = "ssh_public_key"
+  key      = "TF_VAR_ssh_public_key"
   value    = var.ssh_public_key
-  category = "terraform"
+  category = "env"
 }
