@@ -17,3 +17,8 @@ resource "tfe_workspace" "azure_vault_hvd" {
     identifier                 = "${var.github_organization}/azure-vault-hvd-ws"
   }
 }
+
+resource "tfe_workspace_settings" "azure_core_infra_settings" {
+  workspace_id              = tfe_workspace.azure_core_infra.id
+  remote_state_consumer_ids = [tfe_workspace.azure_vault_hvd.id]
+}
